@@ -9,14 +9,20 @@ import './App.scss';
 const Layout = () => (
   <div className="layout-container">
     <header className="header">
-      <img alt="Company Logo" className="logo" src={logo} />
+      <NavLink to="/">
+        <img alt="Company Logo" className="logo" src={logo} />
+      </NavLink>
       <nav>
         <ul>
-          <li>
-            <NavLink to="/">Home</NavLink>
+          <li className="header__links">
+            <NavLink to="/" className="home__link">
+              Home
+            </NavLink>
           </li>
-          <li>
-            <NavLink to="/users">Users</NavLink>
+          <li className="header__links">
+            <NavLink to="/users" className="users__link">
+              Users
+            </NavLink>
           </li>
         </ul>
       </nav>

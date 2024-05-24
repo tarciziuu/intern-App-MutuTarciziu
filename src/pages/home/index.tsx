@@ -1,16 +1,13 @@
-const Home = () => (
-  <div
-    style={{
-      alignItems: 'center',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      minHeight: '90vh',
-      width: '100%',
-    }}
-  >
-    <h1>Welcome!</h1>
-  </div>
-);
+import CardManager from './cardManager';
+import styles from './home.module.scss';
+
+const Home = () => {
+  return (
+    <div className={styles.homeContainer}>
+      <h1 className={styles.welcomeMsg}>Welcome!</h1>
+      <CardManager />
+    </div>
+  );
+};
 
 export default Home;

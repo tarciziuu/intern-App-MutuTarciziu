@@ -1,21 +1,39 @@
-@import "./styles/index.scss";
+@import './styles/index.scss';
 
 .header {
-  background-color: #a4c991;
-  padding: 10px 20px;
+  background-color: #1b1b1b;
   color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
- 
-}
+  padding: 10px 20px;
 
-.layout-container {
-  min-height: 100vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .logo {
   @include for-phone-only {
-    width: 50px;
+    width: 250px;
   }
+  background-color: black;
+  padding: 10px;
+}
+
+.home__link,
+.users__link {
+  color: white;
+  text-decoration: none;
+}
+
+.header__links {
+  display: inline;
+  padding-left: 20px;
+
+  font-weight: bold;
+  font-size: large;
+}
+
+.home__link:hover,
+.users__link:hover {
+  color: #01d4d7;
+  transition-duration: 0.5s;
 }
