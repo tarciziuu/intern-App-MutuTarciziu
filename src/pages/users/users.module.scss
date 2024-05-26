@@ -1,4 +1,8 @@
-.loadButton {
+// I did not use mixins and variables because there
+// are only a few lines of code and uncertain styling.
+
+.load__button,
+.reset__button {
   margin-top: 10px;
   padding: 10px;
 
@@ -9,14 +13,23 @@
   color: white;
   font-weight: bold;
   transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #01a8ad;
+    transition-duration: 0.5s;
+  }
 }
 
-.loadButton:hover {
-  background-color: #01a8ad;
-  transition-duration: 0.5s;
+.reset__button {
+  margin: 0 10px 0 10px;
+  background-color: #ff5f56;
+
+  &:hover {
+    background-color: red;
+  }
 }
 
-.container {
+.users__container {
   width: fit-content;
   margin: 30px;
   padding: 20px;
@@ -24,36 +37,41 @@
   background: white;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  .select__filter {
+    margin-bottom: 10px;
+    padding: 5px;
+    border-radius: 4px;
+    outline: none;
+  }
+
+  .label__filter {
+    display: block;
+    margin-bottom: 3px;
+  }
 }
 
-.usersTable {
+.users__table {
   border-collapse: collapse;
   width: 100%;
-}
 
-.usersTable th,
-.usersTable td {
-  padding: 8px;
-  text-align: left;
+  th,
+  td {
+    padding: 8px;
+    text-align: left;
 
-  border: 1px solid #000;
-}
+    border: 1px solid #000;
+  }
 
-.usersTable th {
-  background-color: #f2f2f2;
-}
+  th {
+    background-color: #f2f2f2;
+  }
 
-.usersTable tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
 
-.usersTable tr:hover {
-  background-color: #ddd;
-}
-
-.selectFilter {
-  margin-bottom: 10px;
-  padding: 5px;
-  border-radius: 4px;
-  outline: none;
+  tr:hover {
+    background-color: #ddd;
+  }
 }

@@ -3,8 +3,8 @@ import styles from './home.module.scss';
 
 const Home = () => {
   return (
-    <div className={styles.homeContainer}>
-      <h1 className={styles.welcomeMsg}>Welcome!</h1>
+    <div className={styles.home__container}>
+      <h1 className={styles.welcome__msg}>Welcome!</h1>
       <CardManager />
     </div>
   );

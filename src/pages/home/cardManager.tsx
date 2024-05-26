@@ -16,6 +16,8 @@ const CardManager = () => {
   const [editIndex, setEditIndex] = useState<number | null>(null);
   const [updatedTitle, setUpdatedTitle] = useState('');
   const [updatedDescription, setUpdatedDescription] = useState('');
+  // State for success message
+  const [successMessage, setSuccessMessage] = useState('');
 
   // Function to add a new card
   const handleAddCard = () => {
@@ -30,6 +32,10 @@ const CardManager = () => {
     setError('');
     setNewCardTitle('');
     setNewCardDescription('');
+    setSuccessMessage('Card added successfully!');
+    setTimeout(() => {
+      setSuccessMessage('');
+    }, 3000);
   };
 
   // Function to start editing a card
@@ -73,23 +79,26 @@ const CardManager = () => {
   };
 
   return (
-    <div className={styles.cardManager}>
+    <div className={styles.card__manager}>
       <h2>Add new card</h2>
-      {error && <div className={styles.error}>{error}</div>}
+      {error && <div className={styles.error__message}>{error}</div>}
+      {successMessage && (
+        <div className={styles.success__message}>{successMessage}</div>
+      )}
       <input
-        className={styles.inputField}
+        className={styles.input__field}
         type="text"
         placeholder="Title"
         value={newCardTitle}
         onChange={e => setNewCardTitle(e.target.value)}
       />
       <textarea
-        className={styles.textareaField}
+        className={styles.textarea__field}
         placeholder="Description"
         value={newCardDescription}
         onChange={e => setNewCardDescription(e.target.value)}
       ></textarea>
-      <button className={styles.addButton} onClick={handleAddCard}>
+      <button className={styles.add__button} onClick={handleAddCard}>
         Add card
       </button>
 
@@ -98,43 +107,49 @@ const CardManager = () => {
       {cards.map((card, index) => (
         <div key={index} className={styles.card}>
           {isEditing && editIndex === index ? (
-            <>
-              <input
-                className={styles.inputField}
-                type="text"
-                value={updatedTitle}
-                onChange={e => setUpdatedTitle(e.target.value)}
-              />
-              <textarea
-                className={styles.textareaField}
-                value={updatedDescription}
-                onChange={e => setUpdatedDescription(e.target.value)}
-              ></textarea>
-              <button
-                className={styles.updateButton}
-                onClick={handleFinishEdit}
-              >
-                Finish
-              </button>
-              <button
-                className={styles.deleteButton}
-                onClick={handleCancelEdit}
-              >
-                Cancel
-              </button>
-            </>
+            <div className={styles.popup__overlay}>
+              <div className={styles.popup}>
+                <h3>Edit Card</h3>
+                {error && <div className={styles.error}>{error}</div>}
+                <input
+                  className={styles.input__field}
+                  type="text"
+                  value={updatedTitle}
+                  onChange={e => setUpdatedTitle(e.target.value)}
+                  placeholder="Title"
+                />
+                <textarea
+                  className={styles.textarea__field}
+                  value={updatedDescription}
+                  onChange={e => setUpdatedDescription(e.target.value)}
+                  placeholder="Description"
+                ></textarea>
+                <button
+                  className={styles.done__button}
+                  onClick={handleFinishEdit}
+                >
+                  Done
+                </button>
+                <button
+                  className={styles.cancel__button}
+                  onClick={handleCancelEdit}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
           ) : (
             <>
-              <h3 className={styles.cardTitle}>{card.title}</h3>
-              <p className={styles.cardDescription}>{card.description}</p>
+              <h3 className={styles.card__title}>{card.title}</h3>
+              <p className={styles.card__description}>{card.description}</p>
               <button
-                className={styles.updateButton}
+                className={styles.update__button}
                 onClick={() => handleUpdateClick(index)}
               >
                 Update
               </button>
               <button
-                className={styles.deleteButton}
+                className={styles.delete__button}
                 onClick={() => handleDeleteCard(index)}
               >
                 Delete

@@ -8,32 +8,36 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+
+  .header__links {
+    display: inline;
+    padding-left: 20px;
+
+    font-weight: bold;
+    font-size: large;
+
+    .home__link,
+    .users__link {
+      color: white;
+      text-decoration: none;
+
+      &:hover {
+        color: #01d4d7;
+        transition-duration: 0.5s;
+      }
+    }
+  }
 }
 
 .logo {
   @include for-phone-only {
     width: 250px;
   }
+
+  @include for-smaller-phone-only {
+    width: 150px;
+  }
+
   background-color: black;
   padding: 10px;
-}
-
-.home__link,
-.users__link {
-  color: white;
-  text-decoration: none;
-}
-
-.header__links {
-  display: inline;
-  padding-left: 20px;
-
-  font-weight: bold;
-  font-size: large;
-}
-
-.home__link:hover,
-.users__link:hover {
-  color: #01d4d7;
-  transition-duration: 0.5s;
 }
