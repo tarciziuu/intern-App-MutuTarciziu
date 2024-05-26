@@ -9,6 +9,8 @@ const CardManager = () => {
   // State for new card input fields
   const [newCardTitle, setNewCardTitle] = useState('');
   const [newCardDescription, setNewCardDescription] = useState('');
+  // State for success message
+  const [successMessage, setSuccessMessage] = useState('');
   // State for managing errors
   const [error, setError] = useState('');
   // State for editing
@@ -16,8 +18,9 @@ const CardManager = () => {
   const [editIndex, setEditIndex] = useState<number | null>(null);
   const [updatedTitle, setUpdatedTitle] = useState('');
   const [updatedDescription, setUpdatedDescription] = useState('');
-  // State for success message
-  const [successMessage, setSuccessMessage] = useState('');
+  // State for delete confirmation
+  const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
+  const [deleteIndex, setDeleteIndex] = useState<number | null>(null);
 
   // Function to add a new card
   const handleAddCard = () => {
@@ -72,10 +75,26 @@ const CardManager = () => {
     setError('');
   };
 
-  // Function to delete a card
-  const handleDeleteCard = (index: number) => {
-    const updatedCards = cards.filter((_, i) => i !== index);
-    setCards(updatedCards);
+  // Function to show delete confirmation popup
+  const handleDeleteClick = (index: number) => {
+    setDeleteIndex(index);
+    setIsDeletePopupOpen(true);
+  };
+
+  // Function to confirm deletion of a card
+  const handleConfirmDelete = () => {
+    if (deleteIndex !== null) {
+      const updatedCards = cards.filter((_, i) => i !== deleteIndex);
+      setCards(updatedCards);
+      setDeleteIndex(null);
+      setIsDeletePopupOpen(false);
+    }
+  };
+
+  // Function to cancel deletion of a card
+  const handleCancelDelete = () => {
+    setDeleteIndex(null);
+    setIsDeletePopupOpen(false);
   };
 
   return (
@@ -150,7 +169,7 @@ const CardManager = () => {
               </button>
               <button
                 className={styles.delete__button}
-                onClick={() => handleDeleteCard(index)}
+                onClick={() => handleDeleteClick(index)}
               >
                 Delete
               </button>
@@ -158,6 +177,25 @@ const CardManager = () => {
           )}
         </div>
       ))}
+      {isDeletePopupOpen && (
+        <div className={styles.popup__overlay}>
+          <div className={styles.popup}>
+            <h3>Are you sure you want to delete this card?</h3>
+            <button
+              className={styles.delete__button}
+              onClick={handleConfirmDelete}
+            >
+              Delete
+            </button>
+            <button
+              className={styles.cancel__button}
+              onClick={handleCancelDelete}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
